@@ -1,8 +1,5 @@
 <?php
 
-use App\Notifications\ApiNotify;
-use App\Services\FlightApiService;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    Notification::route('mail', 'cfaisal009@gmail.com')->notify(new ApiNotify("Execution was completed successfully."));
-
     echo '<p style="text-align: center;color:red;">What you are looking is not here. 404 :(</p>';
 
     return;
