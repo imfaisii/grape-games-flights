@@ -7,6 +7,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Stringable;
 
 class Kernel extends ConsoleKernel
 {
@@ -21,12 +22,12 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         // flights command
-        $schedule->command('flight:api-store')->twiceDailyAt(3, 15)
+        $schedule->command('flight:api-store')->twiceDailyAt(4, 16)
             ->onSuccess(function () {
                 Notification::route('mail', ['cfaisal009@gmail.com', 'khanusmann1269@gmail.com'])->notify(new ApiNotify("Execution was completed successfully."));
             })
-            ->onFailure(function () {
-                Notification::route('mail', ['cfaisal009@gmail.com', 'khanusmann1269@gmail.com'])->notify(new ApiNotify("There was an error in execution."));
+            ->onFailure(function (Stringable $error) {  
+                Notification::route('mail', ['cfaisal009@gmail.com', 'khanusmann1269@gmail.com'])->notify(new ApiNotify("There was an error in execution : $error"));
             });
     }
 
