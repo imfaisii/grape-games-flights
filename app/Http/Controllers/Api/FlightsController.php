@@ -11,8 +11,10 @@ class FlightsController extends Controller
     public function index()
     {
         return response()->json([
-            'status' => 'success',
-            'data' => Flight::all()
+            [
+                'status' => 'success',
+                'data' => Flight::all()
+            ]
         ], 200);
     }
 }
