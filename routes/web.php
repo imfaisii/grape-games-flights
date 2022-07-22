@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\FlightApiService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     echo '<p style="text-align: center;color:red;">What you are looking is not here. 404 :(</p>';
+
+    return;
+});
+
+Route::get('/test-api', function () {
+    FlightApiService::execute();
 
     return;
 });

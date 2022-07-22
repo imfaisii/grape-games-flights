@@ -23,10 +23,10 @@ class Kernel extends ConsoleKernel
         // flights command
         $schedule->command('flight:api-store')->twiceDaily()
             ->onSuccess(function () {
-                Notification::route('mail', 'cfaisal009@gmail.com')->notify(new ApiNotify("Execution was completed successfully."));
+                Notification::route('mail', ['cfaisal009@gmail.com', 'khanusmann1269@gmail.com'])->notify(new ApiNotify("Execution was completed successfully."));
             })
             ->onFailure(function () {
-                Notification::route('mail', 'cfaisal009@gmail.com')->notify(new ApiNotify("There was an error in execution."));
+                Notification::route('mail', ['cfaisal009@gmail.com', 'khanusmann1269@gmail.com'])->notify(new ApiNotify("There was an error in execution."));
             });
     }
 

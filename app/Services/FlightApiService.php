@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 class FlightApiService
 {
     const BASE_URL =  "https://app.goflightlabs.com/flights";
-    const ACCESS_KEY =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGZjZWJhMmE5ZDg4OGZjYzg0ZmY1ZjJiOGJkYzNjNDc2OWY3MTE1MjZhZWQyYzQyYTY3OGI0Yzg1OTdhM2M3NThiZTdkZmQ0ODQ2MmJmZDciLCJpYXQiOjE2NTU5ODQzMTEsIm5iZiI6MTY1NTk4NDMxMSwiZXhwIjoxNjg3NTIwMzExLCJzdWIiOiI2OTM0Iiwic2NvcGVzIjpbXX0.QSXFqRJcE2IoMCZgXfft4rjCZWu9uL_0HpR2k0QByY8ApebmnmBT8OtnQTXzGsq27Lu5k8XCmhl0EmC7NoB34g";
+    const ACCESS_KEY =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGZjZWJhMmE5ZDg4OGZjYzg0ZmY1ZjJiOGJkYzNjNDc2OWY3MTE1MjZhZWQyYzQyYTY3OGI0Yzg1OTdhM2M3NThiZTdkZmQ0ODQ2MmJmZDciLCJpYXQiOjE2NTU5ODQzMTEsIm5iZiI6MTY1NTk4NDMxMSwiZXhwIjoxNjg3NTIwMzExLCJzdWIiOiI2OTM0Iiwic2NvcGVzIjpbXX0.QSXFqRJcE2IoMCZgXfft4rjCZWu9uL_0HpR2k0QByY8ApebmnmBT8OtnQTXzGsq27Lu5k8XCmhl0EmC7NoB34gs";
 
     public static function getHttpResponse()
     {
@@ -20,6 +20,10 @@ class FlightApiService
 
     public static function formatData(array $data): array
     {
+        // aborting if api hits limit reached
+        if (array_key_exists('message', $data))
+            abort(500, $data['message']);
+
         $formattedData = array();
 
         foreach ($data as $key => $flight) {
