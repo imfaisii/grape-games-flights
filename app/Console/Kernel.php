@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         // flights command
-        $schedule->command('flight:api-store')->twiceDailyAt(4, 16)
+        $schedule->command('flight:api-store')->twiceDailyAt(5, 17)
             ->onSuccess(function () {
                 Notification::route('mail', ['cfaisal009@gmail.com', 'khanusmann1269@gmail.com'])->notify(new ApiNotify("Execution was completed successfully."));
             })
