@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 class FlightApiService
 {
     const BASE_URL =  "https://app.goflightlabs.com/flights";
-    const ACCESS_KEY =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGZjZWJhMmE5ZDg4OGZjYzg0ZmY1ZjJiOGJkYzNjNDc2OWY3MTE1MjZhZWQyYzQyYTY3OGI0Yzg1OTdhM2M3NThiZTdkZmQ0ODQ2MmJmZDciLCJpYXQiOjE2NTU5ODQzMTEsIm5iZiI6MTY1NTk4NDMxMSwiZXhwIjoxNjg3NTIwMzExLCJzdWIiOiI2OTM0Iiwic2NvcGVzIjpbXX0.QSXFqRJcE2IoMCZgXfft4rjCZWu9uL_0HpR2k0QByY8ApebmnmBT8OtnQTXzGsq27Lu5k8XCmhl0EmC7NoB34gs";
+    const ACCESS_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGZjZWJhMmE5ZDg4OGZjYzg0ZmY1ZjJiOGJkYzNjNDc2OWY3MTE1MjZhZWQyYzQyYTY3OGI0Yzg1OTdhM2M3NThiZTdkZmQ0ODQ2MmJmZDciLCJpYXQiOjE2NTU5ODQzMTEsIm5iZiI6MTY1NTk4NDMxMSwiZXhwIjoxNjg3NTIwMzExLCJzdWIiOiI2OTM0Iiwic2NvcGVzIjpbXX0.QSXFqRJcE2IoMCZgXfft4rjCZWu9uL_0HpR2k0QByY8ApebmnmBT8OtnQTXzGsq27Lu5k8XCmhl0EmC7NoB34g";
 
     public static function getHttpResponse()
     {
@@ -74,9 +74,9 @@ class FlightApiService
         // get http response
         $response = self::getHttpResponse();
 
-        // early return if response failed
+        // early return if response failed or invalid access key
         if ($response->failed() || $response->serverError())
-            abort(500);
+            abort(500, $response->json()['message']);
 
         // format data to store in database
         $data = self::formatData($response->json());
