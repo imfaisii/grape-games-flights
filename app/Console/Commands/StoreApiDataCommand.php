@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Services\FlightApiService;
+use Exception;
 use Illuminate\Console\Command;
 
 class StoreApiDataCommand extends Command
@@ -28,10 +29,16 @@ class StoreApiDataCommand extends Command
      */
     public function handle()
     {
-        // execute business logic
-        FlightApiService::execute();
+        try {
+            // execute business logic
+            FlightApiService::execute();
+
+            $this->info("APi Successful");
+        } catch (Exception $e) {
+            $this->error($e->getMessage());
+            $this->info("Failed");
+        }
 
         $this->info("Done");
-        return 0;
     }
 }
