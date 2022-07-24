@@ -32,8 +32,6 @@ class StoreApiDataCommand extends Command
         try {
             // execute business logic
             FlightApiService::execute();
-
-            $this->success("APi Successful");
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }

@@ -13,7 +13,7 @@ class FlightsController extends Controller
         return response()->json([
             [
                 'status' => 'success',
-                'data' => Flight::all()
+                'data' => Flight::latest()->get()
             ]
         ], 200);
     }
