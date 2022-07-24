@@ -20,7 +20,6 @@ class FlightApiService
 
     public static function formatData(array $data): array
     {
-        dd($data);
         // aborting if api hits limit reached
         if (array_key_exists('message', $data))
             abort(500, $data['message']);
