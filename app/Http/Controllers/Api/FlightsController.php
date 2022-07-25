@@ -13,7 +13,8 @@ class FlightsController extends Controller
         return response()->json([
             [
                 'status' => 'success',
-                'data' => Flight::latest()->get()
+                'total_records' => Flight::count(),
+                'data' => Flight::latest()->cursorPaginate(100),
             ]
         ], 200);
     }

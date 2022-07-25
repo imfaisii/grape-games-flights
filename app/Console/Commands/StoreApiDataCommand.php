@@ -20,7 +20,7 @@ class StoreApiDataCommand extends Command
      *
      * @var string
      */
-    protected $description = 'This command fetched stores the flight data everday.';
+    protected $description = 'This command fetches and stores the flights data everday.';
 
     /**
      * Execute the console command.
