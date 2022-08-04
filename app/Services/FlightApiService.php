@@ -65,10 +65,7 @@ class FlightApiService
         if ($response->failed() || $response->serverError())
             abort(500, $response->json()['message']);
 
-        // format data to store in database
-        $data = self::formatData($response->json());
-
-        // store in database
-        self::store($data);
+        // format and store data to store in database
+        self::store(self::formatData($response->json()));
     }
 }
