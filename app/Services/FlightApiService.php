@@ -52,21 +52,8 @@ class FlightApiService
     public static function store(array $data)
     {
         // here we store data in database
-        foreach ($data as $key => $model) {
-            Flight::firstOrCreate([
-                'departureTimeZone' => $model['departureTimeZone'],
-                'arrivalTimeZone' => $model['arrivalTimeZone'],
-                'estimatedTime' => $model['estimatedTime'],
-                'departureAirport' => $model['departureAirport'],
-                'arrivalAirport' => $model['arrivalAirport'],
-                'flightDate' => $model['flightDate'],
-                'status' => $model['status'],
-                'airline' => $model['airline'],
-                'flightNo' => $model['flightNo'],
-                'departureTime' => $model['departureTime'],
-                'arrivalTime' => $model['arrivalTime'],
-            ]);
-        }
+        foreach ($data as $key => $model)
+            Flight::firstOrCreate($model);
     }
 
     public static function execute()
